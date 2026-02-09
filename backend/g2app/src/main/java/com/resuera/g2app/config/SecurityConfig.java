@@ -12,24 +12,27 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    // BCrypt for password encryption
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+        http
+            .csrf(csrf -> csrf.disable()) // disable CSRF for testing
+            .authorizeHttpRequests(auth -> auth
+                    .requestMatchers(
+                            "/api/auth/register",
+                            "/api/auth/login",
+                            "/api/user/me"   // ← allow for Session 1
+                    ).permitAll()
+                    .anyRequest().authenticated()
+            );
+
+        return http.build();
+    }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-    // Allow public access to auth endpoints
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-            .csrf(csrf -> csrf.disable()) // disable CSRF for testing
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/**").permitAll() // allow register/login
-                .anyRequest().authenticated()
-            )
-            .httpBasic(basic -> {}); // keep basic auth for others
-
-        return http.build();
-    }
 }
+
  
