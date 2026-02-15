@@ -14,19 +14,32 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-
         http
-            .csrf(csrf -> csrf.disable()) // disable CSRF for testing
+            .csrf(csrf -> csrf.disable())
+            .cors(cors -> {})   // 👈 enable CORS
             .authorizeHttpRequests(auth -> auth
-                    .requestMatchers(
-                            "/api/auth/register",
-                            "/api/auth/login",
-                            "/api/user/me"   // ← allow for Session 1
-                    ).permitAll()
-                    .anyRequest().authenticated()
+                .requestMatchers(
+                    "/api/auth/register",
+                    "/api/auth/login",
+                    "/api/user/me"
+                ).permitAll()
+                .anyRequest().authenticated()
             );
 
         return http.build();
+    }
+
+    @Bean
+    public org.springframework.web.cors.CorsConfigurationSource corsConfigurationSource() {
+        var configuration = new org.springframework.web.cors.CorsConfiguration();
+        configuration.setAllowCredentials(true);
+        configuration.addAllowedOrigin("http://localhost:3000");
+        configuration.addAllowedHeader("*");
+        configuration.addAllowedMethod("*");
+
+        var source = new org.springframework.web.cors.UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 
     @Bean
