@@ -7,4 +7,43 @@
     android:layout_height="match_parent"
     tools:context=".ui.DashboardActivity">
 
+    <TextView
+        android:id="@+id/welcomeText"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:text="Welcome to EventHive!"
+        android:textAlignment="center"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnLogout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        android:fontFamily="@font/poppins_bold"
+        android:textColor="@color/maroon_700"/>
+
+    <Button
+        android:id="@+id/btnProfile"
+        android:layout_width="115dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="25dp"
+        android:textSize="17dp"
+        android:text="Profile"
+        android:fontFamily="@font/poppins_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcomeText" />
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="115dp"
+        android:layout_height="46dp"
+        android:textSize="17dp"
+        android:text="Logout"
+        android:fontFamily="@font/poppins_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnProfile" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

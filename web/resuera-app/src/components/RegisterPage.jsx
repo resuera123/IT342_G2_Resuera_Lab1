@@ -30,7 +30,8 @@ const RegisterPage = () => {
         <input type="email" placeholder="Email" onChange={e => setForm({...form, userEmail: e.target.value})} required />
         <input type="password" placeholder="Password" onChange={e => setForm({...form, userPassword: e.target.value})} required />
         <button type="submit">Register</button>
-        <p onClick={() => navigate("/")}>Already have an account? Login</p>
+        <span>Already have an Account?</span>
+        <p onClick={() => navigate("/")}>Login</p>
       </form>
     </div>
   );
